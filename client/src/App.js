@@ -3,6 +3,8 @@ import Authentication from './Components/Authentication/Authentication'
 import Home from './Components/Home/Home'
 import Friends from './Components/Friends/Friends'
 import MessageRoom from './Components/MessageRoom/MessageRoom'
+import SearchPeople from './Components/SearchPeople/SearchPeople'
+import UploadPhoto from './Components/UploadPhoto/UploadPhoto'
 import {Switch, Route} from 'react-router-dom'
 
 function App() {
@@ -12,8 +14,16 @@ function App() {
           <Authentication />
         </Route>
 
+        <Route path='/UploadPhoto'>
+          <UploadPhoto />
+        </Route>
+
         <Route path='/Home'>
           <Home />
+        </Route>
+
+        <Route path='/SearchPeople'>
+          <SearchPeople />
         </Route>
 
         <Route path='/Friends'>

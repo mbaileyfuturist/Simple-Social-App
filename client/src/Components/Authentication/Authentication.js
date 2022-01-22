@@ -15,6 +15,10 @@ const Authenticaion = () => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [existingUser, setExistingUser] = useState(true)
+    const [age, setAge] = useState(0)
+    const [address, setAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
 
     const changeFirstName = event => {
         setFirstName(event.target.value)
@@ -38,6 +42,21 @@ const Authenticaion = () => {
 
     const toggleExistingUser = () => {
         setExistingUser(!existingUser)
+    }
+
+    const changeAge = event => {
+        setAge(event.target.value)
+    }
+    const changeAddress = event => {
+        setAddress(event.target.value)
+    }
+
+    const changeCity = event => {
+        setCity(event.target.value)
+    }
+
+    const changeState = event => {
+        setState(event.target.value)
     }
 
     const signup = async event => {
@@ -79,7 +98,11 @@ const Authenticaion = () => {
                             userName:userName,
                             password:password,
                             id:1,
-                            posts:1
+                            posts:1,
+                            address:address,
+                            city:city,
+                            state:state,
+                            age:age
                         })
                     })
 
@@ -202,6 +225,19 @@ const Authenticaion = () => {
             <div className={classes.inputContainer}>
                 <Input className={classes.input} type='text' value={lastName} onChange={changeLastName} placeholder='last name'/>
             </div>
+            <div className={classes.inputContainer}>
+                <Input className={classes.input} type='number' value={age} onChange={changeAge} placeholder='age'/>
+            </div>
+            <div className={classes.inputContainer}>
+                <Input className={classes.input} type='text' value={address} onChange={changeAddress} placeholder='address'/>
+            </div>
+            <div className={classes.inputContainer}>
+                <Input className={classes.input} type='text' value={city} onChange={changeCity} placeholder='city'/>
+            </div>
+            <div className={classes.inputContainer}>
+                <Input className={classes.input} type='text' value={state} onChange={changeState} placeholder='state'/>
+            </div>
+
             <div className={classes.inputContainer}>
                 <Input className={classes.input} type='email' value={email} onChange={changeEmail} placeholder='email'/>
             </div>

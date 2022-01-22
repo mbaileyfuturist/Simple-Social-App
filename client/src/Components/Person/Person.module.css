@@ -1,0 +1,7 @@
+.personContainer{
+    margin:0 auto;
+    text-align: center;
+    width:33%;
+    border: solid black 2px;
+    border-radius:5px;
+}
