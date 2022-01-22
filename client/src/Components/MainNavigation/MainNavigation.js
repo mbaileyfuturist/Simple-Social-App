@@ -1,0 +1,35 @@
+import classes from './MainNavigation.module.css'
+import Input from '../Input/Input'
+import Button from '../Button/Button'
+import { useHistory } from 'react-router-dom'
+
+const MainNavigation = () => {
+
+    const history = useHistory()
+    let myLocalStorage = window.localStorage
+
+    const logOut = () => {
+        myLocalStorage.removeItem('id')
+        history.push('/')
+    }
+
+    return(
+        <div className={classes.header}>
+            <div className={classes.one}>
+                <p className={classes.navLink}>Friends</p>
+            </div>
+            <div className={classes.two}>
+                <Input type='text' className={classes.input} placeholder='find friends'/>
+                <Button className={classes.button} value='search'/>
+            </div>
+            <div className={classes.three}>
+                <p className={classes.navLink}>Messages</p>
+            </div>
+            <div className={classes.four}>
+                <p className={classes.navLink} onClick={logOut}>Logout</p>
+            </div>
+        </div>
+    )
+}
+
+export default MainNavigation

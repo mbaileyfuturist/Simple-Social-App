@@ -1,0 +1,58 @@
+.header{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0px;
+    grid-auto-rows: minmax(100px, auto);
+    background-color: rgb(10, 140, 201);
+    height:75px;
+}
+.one {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    margin-left: 5%;
+    font-size:150%;
+    font-weight:bold;
+  }
+.two {
+    grid-column: 2/4;
+    grid-row: 1;
+    margin-left:0%;
+}
+.three {
+    grid-column: 3/4;
+    grid-row: 1;
+    margin-left: 50%;
+    font-size:150%;
+    font-weight:bold;
+}
+.four {
+    grid-column: 4/4;
+    grid-row: 1;
+    margin-left: 50%;
+    font-size:150%;
+    font-weight:bold;
+  }
+.input{
+    padding:1.5%;
+    font-size: 125%;
+    font-weight: bold;
+    border:solid black 2px;
+    border-radius:5px;
+    margin-top:3%;
+}
+.button{
+    padding:2%;
+    color:white;
+    background-color:rgb(70, 70, 70);
+    border-radius: 5px;
+    font-size: 110%;
+    font-weight: bold;
+    border:solid white 2px;
+    margin-left: 2%;
+}
+.button:hover{
+    border:solid black 2px;
+}
+.navLink:hover{
+    color:white;
+}
