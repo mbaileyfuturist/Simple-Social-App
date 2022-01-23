@@ -43,7 +43,7 @@ const SearchPeople = () => {
         <div>
             <p className={classes.title}>Relevent Users</p>
             {findFriends.map(person => {
-                return <Person firstName={person.firstName} lastName={person.lastName} address={person.address} city={person.city} state={person.state} age={person.age}/>
+                return <Person id={person.id} firstName={person.firstName} lastName={person.lastName} address={person.address} city={person.city} state={person.state} age={person.age}/>
             })}
 
         </div>

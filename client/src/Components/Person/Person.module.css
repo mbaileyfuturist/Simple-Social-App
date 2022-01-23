@@ -5,3 +5,28 @@
     border: solid black 2px;
     border-radius:5px;
 }
+
+.buttonsContainer{
+    margin-bottom: 5%;
+}
+
+.buttonOne{
+    padding:1%;
+    color:white;
+    background-color:rgb(10, 140, 201);
+    border-radius: 5px;
+    font-size: 105%;
+    font-weight: bold;
+    border:solid black 2px;
+}
+
+.buttonTwo{
+    padding:1%;
+    color:white;
+    background-color:rgb(10, 140, 201);
+    border-radius: 5px;
+    font-size: 105%;
+    font-weight: bold;
+    border:solid black 2px;
+    margin-left:3%;
+}

@@ -1,0 +1,45 @@
+.text{
+    text-align:center;
+    margin-top: 5%;
+    font-size:125%;
+}
+.imageSelectorContainer{
+    text-align:center;
+}
+.previewImage{
+    width:50%;
+    height:50%;
+}
+.imageContainer{
+    margin-top:10%;
+    text-align: center;
+
+}
+.buttonContainer{
+    margin-top:5%;
+}
+.button{
+    padding:1%;
+    color:white;
+    background-color:rgb(10, 140, 201);
+    border-radius: 5px;
+    font-size: 105%;
+    font-weight: bold;
+    border:solid black 2px;
+}
+
+.greenButton{
+    padding:1%;
+    color:white;
+    background-color:rgb(10, 201, 51);
+    border-radius: 5px;
+    font-size: 105%;
+    font-weight: bold;
+    border:solid black 2px;
+    margin-bottom:2%;
+}
+
+.greenButton:disabled{
+    background-color:grey;
+
+}

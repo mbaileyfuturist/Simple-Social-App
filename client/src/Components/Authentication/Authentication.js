@@ -148,7 +148,7 @@ const Authenticaion = () => {
                     }
 
                     //Navigate to upload photo.
-                    history.push('/Home')
+                    history.push('/UploadPhoto')
 
                 }catch(error){
                     console.log(error)
@@ -226,7 +226,7 @@ const Authenticaion = () => {
                 <Input className={classes.input} type='text' value={lastName} onChange={changeLastName} placeholder='last name'/>
             </div>
             <div className={classes.inputContainer}>
-                <Input className={classes.input} type='number' value={age} onChange={changeAge} placeholder='age'/>
+                <Input className={classes.input} type='number' value={age} onChange={changeAge} placeholder='age' placeholder='age'/>
             </div>
             <div className={classes.inputContainer}>
                 <Input className={classes.input} type='text' value={address} onChange={changeAddress} placeholder='address'/>
