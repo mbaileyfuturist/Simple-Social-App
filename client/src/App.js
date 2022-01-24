@@ -5,6 +5,9 @@ import Friends from './Components/Friends/Friends'
 import MessageRoom from './Components/MessageRoom/MessageRoom'
 import SearchPeople from './Components/SearchPeople/SearchPeople'
 import UploadPhoto from './Components/UploadPhoto/UploadPhoto'
+import About from './Components/About/About'
+import UserProfile from './Components/UserProfile/UserProfile'
+import Messages from './Components/Messages/Messages'
 import {Switch, Route} from 'react-router-dom'
 
 function App() {
@@ -12,6 +15,10 @@ function App() {
     <Switch>
         <Route path='/' exact>
           <Authentication />
+        </Route>
+
+        <Route path='/About'>
+          <About />
         </Route>
 
         <Route path='/UploadPhoto'>
@@ -28,6 +35,14 @@ function App() {
 
         <Route path='/Friends'>
           <Friends />
+        </Route>
+
+        <Route path='/Profile:id'>
+          <UserProfile />
+        </Route>
+
+        <Route path='/Messages'>
+          <Messages />
         </Route>
 
         <Route path='/MessageRoom:id'>

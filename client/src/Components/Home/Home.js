@@ -103,7 +103,7 @@ const Home = () => {
 
     return(
         <div>
-            <MainNavigation />
+            <MainNavigation link={'Friends'}/>
             <div className={classes.container}>
                 <div>
                     <p>Want to share something with the world?</p>
@@ -112,7 +112,7 @@ const Home = () => {
                 </div>
                 <div className={classes.posts}>
                     {posts.map((post, index) => {
-                        return <Post key={index} header={post.postHeader} body={post.post} id={post.header}/>
+                        return <Post key={index} header={post.postHeader} body={post.post} id={post.postHeader}/>
                     })}
                 </div>
             </div>

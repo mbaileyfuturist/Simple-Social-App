@@ -1,0 +1,35 @@
+.container{
+    margin:0 auto;
+    margin-top: 10%;
+    text-align:center;
+}
+
+img{
+    height:100px;
+    width:100px;
+}
+
+.title{
+    font-weight:bold;
+}
+
+.buttonOne{
+    padding:2%;
+    color:white;
+    background-color:rgb(10, 140, 201);
+    border-radius: 5px;
+    font-size: 105%;
+    font-weight: bold;
+    border:solid rgb(10, 140, 201) 2px;
+}
+
+.buttonTwo{
+    padding:2%;
+    color:white;
+    background-color:rgb(70, 70, 70);
+    border-radius: 5px;
+    font-size: 110%;
+    font-weight: bold;
+    border:solid white 2px;
+    margin-left: 2%;
+}

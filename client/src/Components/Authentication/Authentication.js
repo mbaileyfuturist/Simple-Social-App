@@ -148,7 +148,7 @@ const Authenticaion = () => {
                     }
 
                     //Navigate to upload photo.
-                    history.push('/UploadPhoto')
+                    history.push('/About')
 
                 }catch(error){
                     console.log(error)

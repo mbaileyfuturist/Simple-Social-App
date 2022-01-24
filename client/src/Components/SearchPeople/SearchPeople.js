@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import Person from '../Person/Person'
 import classes from './SearchPeople.module.css'
+import Button from '../Button/Button'
+import MainNavigation from '../MainNavigation/MainNavigation'
 
 const SearchPeople = () => {
 
@@ -41,11 +43,12 @@ const SearchPeople = () => {
 
     return(
         <div>
+            <MainNavigation link={'Home'}/>
             <p className={classes.title}>Relevent Users</p>
             {findFriends.map(person => {
-                return <Person id={person.id} firstName={person.firstName} lastName={person.lastName} address={person.address} city={person.city} state={person.state} age={person.age}/>
+                return <Person key={person.id} id={person.id} firstName={person.firstName} lastName={person.lastName} 
+                address={person.address} city={person.city} state={person.state} age={person.age} image={person.uploadProfilePicture.url} status={'viewing'}/>
             })}
-
         </div>
     )
 }
