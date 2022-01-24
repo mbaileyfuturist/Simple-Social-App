@@ -22,6 +22,9 @@ img{
     font-weight: bold;
     border:solid rgb(10, 140, 201) 2px;
 }
+.buttonOne:hover{
+    border:solid rgb(0, 0, 0) 2px;
+}
 
 .buttonTwo{
     padding:2%;
@@ -32,4 +35,8 @@ img{
     font-weight: bold;
     border:solid white 2px;
     margin-left: 2%;
+}
+
+.buttonTwo:hover{
+    border:solid rgb(0, 0, 0) 2px;
 }

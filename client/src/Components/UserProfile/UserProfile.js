@@ -80,8 +80,10 @@ const UserProfile = () => {
                 about:correspondingUser.about,
                 city:correspondingUser.city,
                 state:correspondingUser.state,
-                status:'requested',
-                profilePicture:correspondingUser.uploadProfilePicture.url
+                status:'sentRequest',
+                profilePicture:correspondingUser.uploadProfilePicture.url,
+                age:correspondingUser.age,
+                id:correspondingUser.id
             })
         })
         }catch(error){
@@ -101,9 +103,10 @@ const UserProfile = () => {
                 about:loggedInUser.about,
                 city:loggedInUser.city,
                 state:loggedInUser.state,
-                status:'requested.',
-                url:correspondingUser.uploadProfilePicture.url
-
+                status:'receivedRequest',
+                profilePicture:loggedInUser.uploadProfilePicture.url,
+                age:loggedInUser,
+                id:loggedInUser.id
             })
         })
         }catch(error){
@@ -113,7 +116,7 @@ const UserProfile = () => {
 
     return(
         <div>
-            <MainNavigation />
+            <MainNavigation link='Home'/>
             <div className={classes.container}>
                 <div className={classes.userInfo}>
                     <img src={imageUrl} />

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import Person from '../Person/Person'
 import classes from './SearchPeople.module.css'
-import Button from '../Button/Button'
 import MainNavigation from '../MainNavigation/MainNavigation'
 
 const SearchPeople = () => {
@@ -23,7 +22,12 @@ const SearchPeople = () => {
                 for(let key in users){
                     const fullName = users[key].firstName + ' ' + users[key].lastName
                     if(fullName === searchFriend){
-                        findFriendsArray.push(users[key])
+                        const copyUser = {
+                            ...users[key],
+                            status:'viewing'
+                        }
+                        console.log(copyUser)
+                        findFriendsArray.push(copyUser)
                     }
                 }
                 setFindFriends(findFriendsArray)
@@ -47,7 +51,7 @@ const SearchPeople = () => {
             <p className={classes.title}>Relevent Users</p>
             {findFriends.map(person => {
                 return <Person key={person.id} id={person.id} firstName={person.firstName} lastName={person.lastName} 
-                address={person.address} city={person.city} state={person.state} age={person.age} image={person.uploadProfilePicture.url} status={'viewing'}/>
+                address={person.address} city={person.city} state={person.state} age={person.age} image={person.uploadProfilePicture.url} status={person.status}/>
             })}
         </div>
     )

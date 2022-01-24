@@ -15,12 +15,24 @@ const Home = () => {
     const [postHeader, setPostHeader] = useState('')
     const [post, setPost] = useState('')
     const [posts, setPosts] = useState([])
+    const [imageUrl, setImageUrl] = useState()
+
 
     useEffect(() => {
 
         let id = myStorage.getItem('id')
         
         const fetchData = async () => {
+
+            //Get the profile picture.
+            try{
+                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/uploadProfilePicture/url.json')
+                const image = await response.json()
+                setImageUrl(image)
+            }catch(error){
+                console.log(error)
+            }
+            //Get the posts.
             try{
 
                 const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json')
@@ -105,6 +117,7 @@ const Home = () => {
         <div>
             <MainNavigation link={'Friends'}/>
             <div className={classes.container}>
+                <img src={imageUrl} />
                 <div>
                     <p>Want to share something with the world?</p>
                     <Button className={classes.button} value={newPost ? 'Cancel':'Add New Post'} type='button' onClick={toggleNewPost}/>

@@ -22,7 +22,7 @@ const Friends = () => {
                 let friendRequestsArray = []
                 let friendsArray = []
                 for(let key in friends){
-                    if(friends[key].status === 'requested'){
+                    if(friends[key].status === 'sentRequest' || friends[key].status === 'receivedRequest'){
                         friendRequestsArray.push(friends[key])
                         console.log(friends[key])
                     }
@@ -48,15 +48,15 @@ const Friends = () => {
                 <div className={classes.one}>
                     <p className={classes.title}>Friends</p>
                     {friends.map(friend => {
-                        return <Person firstName={friend.firstName} lastName={friend.lastName} age={friend.age} city={personalbar.city} state={personalbar.state} 
-                        status={personalbar.status} image={friend.profilePicture}/>
+                        return <Person key={friend.id} id={friend.id} firstName={friend.firstName} lastName={friend.lastName} age={friend.age} city={friend.city} state={friend.state} 
+                        status={friend.status} image={friend.profilePicture}/>
                     })}
                 </div>
                 <div className={classes.two}>
                 <p className={classes.title}>Friend Requests</p>
                 {friendRequests.map(friend => {
-                        return <Person firstName={friend.firstName} lastName={friend.lastName} age={friend.age} city={personalbar.city} state={personalbar.state} 
-                        status={personalbar.status} image={friend.profilePicture}/>
+                        return <Person key={friend.id} id={friend.id} firstName={friend.firstName} lastName={friend.lastName} age={friend.age} city={friend.city} state={friend.state} 
+                        status={friend.status} image={friend.profilePicture}/>
                     })}
                 </div>
             </div>
