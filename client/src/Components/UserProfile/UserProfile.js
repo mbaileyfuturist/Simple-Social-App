@@ -105,7 +105,7 @@ const UserProfile = () => {
                 state:loggedInUser.state,
                 status:'receivedRequest',
                 profilePicture:loggedInUser.uploadProfilePicture.url,
-                age:loggedInUser,
+                age:loggedInUser.age,
                 id:loggedInUser.id
             })
         })

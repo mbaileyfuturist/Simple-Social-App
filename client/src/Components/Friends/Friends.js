@@ -24,17 +24,19 @@ const Friends = () => {
                 for(let key in friends){
                     if(friends[key].status === 'sentRequest' || friends[key].status === 'receivedRequest'){
                         friendRequestsArray.push(friends[key])
-                        console.log(friends[key])
                     }
                     if(friends[key].status === 'accepted'){
                         friendsArray.push(friends[key])
                     }
                 }
+                
                 setFriendRequests(friendRequestsArray)
                 setFriends(friendsArray)
+
             }catch(error){
                 console.log(error)
             }
+
 
         }
 
@@ -48,15 +50,15 @@ const Friends = () => {
                 <div className={classes.one}>
                     <p className={classes.title}>Friends</p>
                     {friends.map(friend => {
-                        return <Person key={friend.id} id={friend.id} firstName={friend.firstName} lastName={friend.lastName} age={friend.age} city={friend.city} state={friend.state} 
-                        status={friend.status} image={friend.profilePicture}/>
+                        return <Person key={friend.id} id={friend.id} firstName={friend.firstName} lastName={friend.lastName} age={friend.age} 
+                        city={friend.city} state={friend.state} status={friend.status} image={friend.profilePicture}/>
                     })}
                 </div>
                 <div className={classes.two}>
                 <p className={classes.title}>Friend Requests</p>
                 {friendRequests.map(friend => {
-                        return <Person key={friend.id} id={friend.id} firstName={friend.firstName} lastName={friend.lastName} age={friend.age} city={friend.city} state={friend.state} 
-                        status={friend.status} image={friend.profilePicture}/>
+                        return <Person key={friend.id} id={friend.id} firstName={friend.firstName} lastName={friend.lastName} age={friend.age} 
+                        city={friend.city} state={friend.state} status={friend.status} image={friend.profilePicture}/>
                     })}
                 </div>
             </div>

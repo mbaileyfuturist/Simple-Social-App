@@ -28,8 +28,7 @@ const Person = props => {
     }
 
     const acceptRequest = async () => {
-
-    console.log(props.id)
+        console.log(props.id)
 
     try{
 
@@ -50,6 +49,21 @@ const Person = props => {
         }
 
         //Set status to accepted for the corresponding user.
+        const responseTwo = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + props.id + '/friends.json')
+        const friendsTwo = await responseTwo.json()
+
+        for(let key in friendsTwo){
+            if(friendsTwo[key].id === user.id){
+                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + props.id + '/friends/' + key + '/status.json', {
+                    method:'PUT',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify('accepted')
+                })
+            }
+        }
+
 
     }catch(error){
         console.log(error)
