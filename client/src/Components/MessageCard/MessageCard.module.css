@@ -1,0 +1,25 @@
+.cardContainer{
+    margin-bottom:2%;
+    border:solid black 2px;
+    border-radius:5px;
+    width:25%;
+    margin:0 auto;
+}
+.button{
+    padding:2%;
+    color:white;
+    background-color:rgb(10, 140, 201);
+    border:solid rgb(10, 140, 201) 2px;
+    border-radius: 5px;
+    font-size: 110%;
+    font-weight: bold;
+    border:solid white 2px;
+    margin-left: 2%;   
+    margin-bottom:2% 
+}
+.button:hover{
+    border:solid black 2px;
+}
+.title{
+    font-weight: bold;
+}

@@ -8,6 +8,7 @@ const Messages = () => {
 
     const myStorage = window.localStorage
     const id = myStorage.getItem('id')
+    //Message room in this case is represented by the first message.
     const [messageRooms, setMessageRooms] = useState([])
 
     useEffect(() => {
@@ -18,12 +19,21 @@ const Messages = () => {
                 const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages.json')
                 const messages = await response.json()
 
-                //Grab the rooms.
-                let messageRoomsArray = []
+                let messagesArray = []
+                let lastMessages = []
+                //Iterate through each room.
                 for(let key in messages){
-                    console.log(messages[key])
+                    const message = messages[key]
+                    //Iterate through each message in the room.
+                    for(let key in message){
+                        messagesArray.push(message[key])
+                    }
+                    //Get the last message and store it.
+                    const lastIndex = messagesArray.length - 1
+                    lastMessages.push(messagesArray[lastIndex])
                 }
 
+                setMessageRooms(lastMessages)
 
             }catch(error){
                 console.log(error)
@@ -37,8 +47,10 @@ const Messages = () => {
         <div>
             <MainNavigation link='Home'/>
             <div className={classes.messagesContainer}>
+                <p className={classes.title}>Recent Messages</p>
                 {messageRooms.map(messageRoom => {
-                    return <MessageCard firstName={messageRoom.firstName} lastName={messageRoom.lastName}/> 
+                    return <MessageCard key={messageRoom.id} id={messageRoom.id} firstName={messageRoom.firstName} 
+                            lastName={messageRoom.lastName} lastMessage={messageRoom.message}/> 
                 })}
             </div>
         </div>

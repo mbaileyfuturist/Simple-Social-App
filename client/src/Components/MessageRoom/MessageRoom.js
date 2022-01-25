@@ -91,7 +91,7 @@ const MessageRoom = () => {
                 message:message,
                 id:id,
                 firstName:user.firstName,
-                lastName:user.lastNAme
+                lastName:user.lastName
                 })
             })
         }catch(error){
