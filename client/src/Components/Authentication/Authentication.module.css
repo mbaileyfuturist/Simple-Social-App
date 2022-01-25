@@ -41,3 +41,8 @@
     color:rgb(10, 140, 201);
     font-weight:bold;
 }
+.error{
+    color:red;
+    font-weight: bold;
+    text-align: center;
+}
