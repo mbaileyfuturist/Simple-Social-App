@@ -36,24 +36,11 @@
 .button:hover{
     border: solid black 2px;
 }
-.messagesWrapper{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: minmax(100px, auto);
-    position:absolute;
-    top:10;
-    width:100%;
+.correspondingMessage{
+    text-align:left;
+    margin-left:5%;
 }
-.correspondingMessages{
-    grid-column: 1 / 2;
-    grid-row: 1;
-    margin:0 auto;
-    margin-top: 10%;
-    margin-left:2%;
-}
-.messages{
-    grid-column: 2/2;
-    grid-row: 1;
-    margin:0 auto;
-    margin-top: 10%;
+.message{
+    text-align:right;
+    margin-right: 5%;
 }

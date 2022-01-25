@@ -13,8 +13,7 @@ const MessageRoom = () => {
     const id = myStorage.getItem('id')
     const [user, setUser] = useState({})
     const [message, setMessage] = useState('')
-    const [userMessages, setUserMessage] = useState([])
-    const [correspondingMessages, setCorrespondingMessages] = useState([])
+    const [messages, setMsssages] = useState([])
 
     useEffect(() => {
         const getCorrespondingUser = async () => {
@@ -29,20 +28,13 @@ const MessageRoom = () => {
                 const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages/' + correspondingId + '.json')
                 const messages = await response.json()
 
-                let userMessagesArray = []
-                let correspondingMessagesArray = []
+                let messageStack = []
                 for(let key in messages){
-                    if(messages[key].id === id){
-                        userMessagesArray.push(messages[key])
-                    }
-
-                    if(messages[key].id === correspondingId){
-                        correspondingMessagesArray.push(messages[key])
-                    }
+                  messageStack.push(messages[key])
                 }
 
-                setUserMessage(userMessagesArray)
-                setCorrespondingMessages(correspondingMessagesArray)
+                setMsssages(messageStack)
+
             }catch(error){
                 console.log(error)
             }
@@ -97,23 +89,18 @@ const MessageRoom = () => {
         }catch(error){
             console.log(error)
         }
+
         setMessage('')
     }
 
     return(
         <div>
-            <MainNavigation link='Hom' />
+            <MainNavigation link='Home' />
             <div className={classes.messagesWrapper}>
-                <div className={classes.correspondingMessages}>
-                    {correspondingMessages.map(object => {
-                        return <p>{object.message}</p>
-                    })}
-                </div>
-                <div className={classes.messages}>
-                    {userMessages.map(object => {
-                        return <p>{object.message}</p>
-                    })}
-                </div>
+                {messages.map(object => {
+                    return object.id ===id ? <p className={classes.message}>{object.message + ': ' + object.firstName}</p> 
+                    : <p className={classes.correspondingMessage}>{object.firstName + ': ' + object.message}</p>
+                })}
             </div>
             <form onSubmit={sendMessage} className={classes.formWrapper}>
                 <div className={classes.one}>
