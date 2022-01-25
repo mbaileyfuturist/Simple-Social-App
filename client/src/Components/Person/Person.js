@@ -71,8 +71,8 @@ const Person = props => {
 
     }
 
-    const message = async () => {
-
+    const navigateToMessageRoom = async () => {
+        history.push('/MessageRoom:' + props.id)
     }
 
     return(
@@ -88,7 +88,7 @@ const Person = props => {
                 {status === 'viewing' && <Button className={classes.buttonOne} value='View Profile' onClick={viewProfile}/>}
                 {status === 'sentRequest' && <Button disabled={true} className={classes.buttonOne} value='Request Pending'/>}
                 {status === 'receivedRequest' && <Button className={classes.buttonOne} value='Accept Request' onClick={acceptRequest}/>}
-                {status === 'accepted' && <Button className={classes.buttonOne} value='Message' onClick={message}/>}
+                {status === 'accepted' && <Button className={classes.buttonOne} value='Message' onClick={navigateToMessageRoom}/>}
             </div>
         </div>
     )

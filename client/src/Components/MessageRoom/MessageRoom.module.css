@@ -1,0 +1,59 @@
+.formWrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+.one {
+    grid-column: 1 / 2;
+    grid-row: 1;
+    margin:0 auto;
+    margin-top: 10%;
+    margin-left:2%;
+}
+.two {
+    grid-column: 2/2;
+    grid-row: 1;
+    margin:0 auto;
+    margin-top: 10%;
+}
+.input{
+    width:300%;
+    padding:5%;
+    border-radius:5px;
+}
+.button{
+    padding:15%;
+    color:white;
+    background-color: rgb(10, 140, 201);
+    border-radius: 5px;
+    font-size: 110%;
+    font-weight: bold;
+    border:solid rgb(10, 140, 201) 2px;
+}
+.button:hover{
+    border: solid black 2px;
+}
+.messagesWrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    position:absolute;
+    top:10;
+    width:100%;
+}
+.correspondingMessages{
+    grid-column: 1 / 2;
+    grid-row: 1;
+    margin:0 auto;
+    margin-top: 10%;
+    margin-left:2%;
+}
+.messages{
+    grid-column: 2/2;
+    grid-row: 1;
+    margin:0 auto;
+    margin-top: 10%;
+}

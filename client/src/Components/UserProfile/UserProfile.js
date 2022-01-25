@@ -2,14 +2,15 @@ import MainNavigation from '../MainNavigation/MainNavigation'
 import classes from './UserProfile.module.css'
 import { useEffect, useState } from 'react'
 import Button from '../Button/Button'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Post from '../Post/Post'
 
-const UserProfile = () => {
+const UserProfile = props => {
 
     let myStorage = window.localStorage
     const id = myStorage.getItem('id')
     const params = useParams()
+    const history = useHistory()
     const userId = params.id.substring(1)
 
     const [posts, setPosts] = useState([])
@@ -114,6 +115,10 @@ const UserProfile = () => {
         }
     }
 
+    const navigateToMessageRoom = async () => {
+        history.push('MessageRoom:' + props.id)
+    }
+
     return(
         <div>
             <MainNavigation link='Home'/>
@@ -124,7 +129,7 @@ const UserProfile = () => {
                     <p>{correspondingUser.about}</p>
                     <div className={classes.buttonsContainer}>
                         <Button className={classes.buttonOne} value='Friend Request' onClick={sendRequest}/>
-                        <Button className={classes.buttonTwo} value='Message' />
+                        <Button className={classes.buttonTwo} value='Message' onClick={navigateToMessageRoom}/>
                     </div>
                 </div>
                 <div className={classes.posts}>
