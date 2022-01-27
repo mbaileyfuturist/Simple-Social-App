@@ -1,5 +1,6 @@
 import classes from './Post.module.css'
 import Button from '../Button/Button'
+import axios from 'axios'
 
 const Post = props => {
 
@@ -7,21 +8,21 @@ const Post = props => {
     const id = myStorage.getItem('id')
 
     const deletePost = async () => {
-         const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json')
-         const posts = await response.json()
+         const response = await axios.post('http://localhost:3001/getPosts', {id:id})
+         const posts = await response.data
 
          for(let key in posts){
-             console.log(posts[key])
              if(posts[key].id === props.header){
                  try{
 
-                    const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts/' + key + '.json', {
-                        method:'DELETE',
-                        headers:{
-                            'Content-Type':'application/json'
-                        },
-                        body:null
-                    })
+                    const response = await axios.post('http://localhost:3001/deletePost', {
+                            id:id,
+                            key:key
+                        })
+
+                    if(response.status !== 200){
+                        throw new Error('Failed to delete post.')
+                    }
                  }catch(error){
                      console.log(error)
                  }

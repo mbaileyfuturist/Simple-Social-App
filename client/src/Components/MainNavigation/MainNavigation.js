@@ -30,8 +30,8 @@ const MainNavigation = props => {
 
     const navigate = async () => {
         myLocalStorage.setItem('friend', friend)
-        setFriend('')
         history.push('/SearchPeople')
+        window.location.reload()
     }
 
     const logOut = () => {
@@ -42,7 +42,7 @@ const MainNavigation = props => {
     return(
         <div className={classes.header}>
             <div className={classes.one}>
-            <p className={classes.navLink} onClick={dynamicNavigation}>{props.link}</p>
+                <p className={classes.navLink} onClick={dynamicNavigation}>{props.link}</p>
             </div>
             <div className={classes.two}>
                 <Input type='text' className={classes.input} placeholder='find friends' onChange={searchFriend}/>

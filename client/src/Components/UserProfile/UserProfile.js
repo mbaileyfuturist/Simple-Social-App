@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Button from '../Button/Button'
 import { useParams, useHistory } from 'react-router-dom'
 import Post from '../Post/Post'
+import axios from 'axios'
 
 const UserProfile = props => {
 
@@ -24,8 +25,8 @@ const UserProfile = props => {
         const fetchUser = async () => {
             try{
                 
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '.json')
-                const loggedInUser = await response.json()
+                const response = await axios.post('http://localhost:3001/getUser', {id:id})
+                const loggedInUser = await response.data
                 setLoggedInUser(loggedInUser)
 
                 if(response.status !== 200){
@@ -39,8 +40,8 @@ const UserProfile = props => {
         const fetchCorrespondingUser = async () => {
             try{
 
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + userId + '.json')
-                const user = await response.json()
+                const response = await axios.post('http://localhost:3001/getUser', {id:userId})
+                const user = await response.data
                 setCorrespondingUser(user)
 
                 let postsArray = []
@@ -70,12 +71,8 @@ const UserProfile = props => {
     const sendRequest = async () => {
         //Post the friend request to logged in user
         try{
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends.json', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
+            const response = await axios.post('http://localhost:3001/addFriend', {
+                paramId:id,
                 firstName:correspondingUser.firstName,
                 lastName:correspondingUser.lastName,
                 about:correspondingUser.about,
@@ -86,19 +83,14 @@ const UserProfile = props => {
                 age:correspondingUser.age,
                 id:correspondingUser.id
             })
-        })
         }catch(error){
             console.log(error)
         }
 
         //Post friend request to corresponding user.
         try{
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + userId + '/friends.json', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
+            const response = await axios.post('http://localhost:3001/addFriend', {
+                paramId:userId,
                 firstName:loggedInUser.firstName,
                 lastName:loggedInUser.lastName,
                 about:loggedInUser.about,
@@ -109,7 +101,6 @@ const UserProfile = props => {
                 age:loggedInUser.age,
                 id:loggedInUser.id
             })
-        })
         }catch(error){
             console.log(error)
         }

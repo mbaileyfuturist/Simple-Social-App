@@ -2,6 +2,7 @@ import classes from './Person.module.css'
 import Button from '../Button/Button'
 import { useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Person = props => {
 
@@ -15,8 +16,8 @@ const Person = props => {
         
         const fetchUser = async () => {
             
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '.json')
-            const user = await response.json()
+            const response = await axios.post('http://localhost:3001/getUser', {id:id})
+            const user = await response.data
             setUser(user)
         }
 
@@ -28,46 +29,40 @@ const Person = props => {
     }
 
     const acceptRequest = async () => {
-        console.log(props.id)
 
-    try{
+        try{
 
-        //Set status to accepted for the user that accepted.
-        const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends.json')
-        const friends = await response.json()
+            //Set status to accepted for the user that accepted.
+            const response = await axios.post('http://localhost:3001/getFriends', {id:id})
+            const friends = await response.data
 
-        for(let key in friends){
-            if(friends[key].id === props.id){
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends/' + key + '/status.json', {
-                    method:'PUT',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify('accepted')
-                })
+            for(let key in friends){
+                if(friends[key].id === props.id){
+                    const response = await axios.post('http://localhost:3001/updateStatus', {
+                        id:id,
+                        key:key,
+                        status:'accepted'})
+                }
             }
-        }
 
-        //Set status to accepted for the corresponding user.
-        const responseTwo = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + props.id + '/friends.json')
-        const friendsTwo = await responseTwo.json()
+            //Set status to accepted for the corresponding user.
+            const responseTwo = await axios.post('http://localhost:3001/getFriends', {id:props.id})
+            const friendsTwo = await responseTwo.data
 
-        for(let key in friendsTwo){
-            if(friendsTwo[key].id === user.id){
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + props.id + '/friends/' + key + '/status.json', {
-                    method:'PUT',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify('accepted')
-                })
+            for(let key in friendsTwo){
+                if(friendsTwo[key].id === user.id){
+                    const response = await axios.put('http://localhost:3001/updateStatus', {
+                            id:props.id,
+                            key:key,
+                            status:'accepted'})
+                }
             }
+
+            window.location.reload()
+
+        }catch(error){
+            console.log(error)
         }
-
-
-    }catch(error){
-        console.log(error)
-    }
 
     }
 

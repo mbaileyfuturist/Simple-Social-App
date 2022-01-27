@@ -4,6 +4,7 @@ import Button from '../Button/Button'
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from '../../firebase'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios';
 
 
 const UploadPhoto = () => {
@@ -60,15 +61,7 @@ const UploadPhoto = () => {
 
     const putUrlToUser = async (url) => {
         setUploaded(true)
-        const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/uploadProfilePicture.json',{
-            method:'PUT',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                id:id, url:url
-            })
-        })
+        const response = await axios.post('http://localhost:3001/uploadPhoto',{ id:id, url:url})
         
         if(response.status !== 200){
             throw new Error('Failed to upload data.')

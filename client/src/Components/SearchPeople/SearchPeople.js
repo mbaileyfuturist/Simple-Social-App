@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Person from '../Person/Person'
 import classes from './SearchPeople.module.css'
 import MainNavigation from '../MainNavigation/MainNavigation'
+import axios from 'axios'
 
 const SearchPeople = () => {
 
@@ -15,8 +16,8 @@ const SearchPeople = () => {
 
             try{
 
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users.json')
-                const users = await response.json()
+                const response = await axios.get('http://localhost:3001/getUsers')
+                const users = await response.data
                 
                 let findFriendsArray = []
                 for(let key in users){
@@ -26,7 +27,6 @@ const SearchPeople = () => {
                             ...users[key],
                             status:'viewing'
                         }
-                        console.log(copyUser)
                         findFriendsArray.push(copyUser)
                     }
                 }
@@ -43,7 +43,7 @@ const SearchPeople = () => {
 
         findUsers()
 
-    }, [])
+    }, [searchFriend])
 
     return(
         <div>

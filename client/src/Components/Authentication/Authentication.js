@@ -3,6 +3,7 @@ import Button from '../Button/Button'
 import classes from './Authentication.module.css'
 import {useState} from 'react'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 const Authenticaion = () => {
 
@@ -15,7 +16,7 @@ const Authenticaion = () => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [existingUser, setExistingUser] = useState(true)
-    const [age, setAge] = useState(0)
+    const [age, setAge] = useState()
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -66,18 +67,13 @@ const Authenticaion = () => {
 
         try{
 
-            const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA5eOtGz1_1mGPZ_xyuvIF0UHXCiFtnn60', {
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
+            const response = await axios.post('http://localhost:3001/signup',{
                     email:email,
                     password:password,
                     returnSecureToken:true
                 })
-            })
-            const data = await response.json()
+
+            const data = await response.data
 
             if(data.error){
                 setError(data.error.message)
@@ -92,24 +88,17 @@ const Authenticaion = () => {
                 //Post the new user
                 try{
 
-                    const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users.json', {
-                        method:'POST',
-                        headers:{
 
-                        },
-                        body:JSON.stringify({
-                            firstName:firstName,
-                            lastName:lastName,
-                            email:email,
-                            userName:userName,
-                            password:password,
-                            id:1,
-                            posts:1,
-                            address:address,
-                            city:city,
-                            state:state,
-                            age:age
-                        })
+                    const response = await axios.post('http://localhost:3001/addUser', {
+                        firstName:firstName,
+                        lastName:lastName,
+                        email:email,
+                        userName:userName,
+                        password:password,
+                        address:address,
+                        city:city,
+                        state:state,
+                        age:age
                     })
 
                     if(response.status !== 200){
@@ -124,13 +113,14 @@ const Authenticaion = () => {
                 let userWithId = {}
                 try{
 
-                    const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users.json')
-                    const users = await response.json()
+                    const response = await axios.get('http://localhost:3001/getUsers')
+                    const users = await response.data
 
+                    console.log(users)
                     for(let key in users){
                         if(users[key].email === email){
                             userWithId = {
-                               ... users[key],
+                               ...users[key],
                                id:key
                             }
 
@@ -141,13 +131,7 @@ const Authenticaion = () => {
                     console.log(userWithId)
 
                     //Update that new user.
-                    const responseTwo = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + userWithId.id + '/id.json', { 
-                        method:'PUT',
-                        headers:{
-                            'Content-Type':'application/json'
-                        },
-                        body:JSON.stringify(userWithId.id)
-                        })
+                    const responseTwo = await axios.post('http://localhost:3001/updateUser', {id: userWithId.id})
 
                     if(responseTwo.status !== 200){
                         throw new Error('Failed to update new user.')
@@ -176,19 +160,13 @@ const Authenticaion = () => {
 
         try{
 
-            const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA5eOtGz1_1mGPZ_xyuvIF0UHXCiFtnn60', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },    
-            body:JSON.stringify({
+            const response = await axios.post('http://localhost:3001/login',{
                 email:email,
                 password:password,
                 returnSecureToken:true
-            })
-            })
+                })
 
-            const data = await response.json()
+            const data = await response.data
 
             if(data.error){
                 setError(data.error.message)
@@ -200,8 +178,8 @@ const Authenticaion = () => {
 
             try{
 
-                const usersResponse = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users.json')
-                const users = await usersResponse.json()
+                const usersResponse = await axios.get('https://localhost:3001/getUsers')
+                const users = await usersResponse.data
 
                 for(let key in users){
                     if(users[key].email === email){
@@ -274,6 +252,7 @@ const Authenticaion = () => {
         <div>
             <form className={classes.formContainer} onSubmit={login}>
                 <div className={classes.formHeader}>
+                    <p className={classes.title}>Simple Social App</p>
                     <p className={classes.formTitle}>Log In</p>
                 </div>
                 <div className={classes.inputContainer}>
