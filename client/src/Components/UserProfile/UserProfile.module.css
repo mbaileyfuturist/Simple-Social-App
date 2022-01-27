@@ -14,7 +14,7 @@ img{
 }
 
 .buttonOne{
-    padding:2%;
+    padding:0.5%;
     color:white;
     background-color:rgb(10, 140, 201);
     border-radius: 5px;
@@ -27,7 +27,7 @@ img{
 }
 
 .buttonTwo{
-    padding:2%;
+    padding:0.5%;
     color:white;
     background-color:rgb(70, 70, 70);
     border-radius: 5px;

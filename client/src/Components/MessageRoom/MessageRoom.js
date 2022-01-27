@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Button from '../Button/Button'
 import MainNavigation from '../MainNavigation/MainNavigation'
+import axios from 'axios'
 
 const MessageRoom = () => {
 
@@ -17,16 +18,19 @@ const MessageRoom = () => {
 
     useEffect(() => {
         const getCorrespondingUser = async () => {
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '.json')
-            const user = await response.json()
+            const response = await axios.post('http://localhost:3001/getCorrespondingUser', {id:correspondingId})
+            const user = await response.data
 
             setUser(user)
         }
 
         const getMessages = async () => {
             try{
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages/' + correspondingId + '.json')
-                const messages = await response.json()
+                const response = await axios.post('http://localhost:3001/getMessages', {
+                    id:id,
+                    correspondingId:correspondingId
+                })
+                const messages = await response.data
 
                 let messageStack = []
                 for(let key in messages){
@@ -57,35 +61,25 @@ const MessageRoom = () => {
         event.preventDefault();
         
         try{
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages/' + correspondingId + '.json',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
+            const response = await axios.post('http://localhost:3001/postMessageToUser',{
                 message:message,
                 id:id,
+                correspondingId:correspondingId,
                 firstName:user.firstName,
                 lastName:user.lastName
                 })
-            })
         }catch(error){
             console.log(error)
         }
 
         try{
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + correspondingId + '/messages/' + id + '.json',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
+            const response = await axios.post('http://localhost:3001/postMessageToCorrespondingUser',{
                 message:message,
                 id:id,
+                correspondingId:correspondingId,
                 firstName:user.firstName,
                 lastName:user.lastName
                 })
-            })
         }catch(error){
             console.log(error)
         }

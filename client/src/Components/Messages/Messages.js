@@ -3,8 +3,9 @@ import MainNavigation from '../MainNavigation/MainNavigation'
 import classes from './Messages.module.css'
 import { useState } from 'react'
 import MessageCard from '../MessageCard/MessageCard'
+import axios from 'axios'
 
-const Messages = () => {
+const Messages = props => {
 
     const myStorage = window.localStorage
     const id = myStorage.getItem('id')
@@ -16,8 +17,10 @@ const Messages = () => {
        const fetchData = async () => {
             try{
 
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages.json')
-                const messages = await response.json()
+                const response = await axios.post('http://localhost:3001/getMessageRooms', {
+                    id:id,
+                })
+                const messages = await response.data
 
                 let messagesArray = []
                 let lastMessages = []

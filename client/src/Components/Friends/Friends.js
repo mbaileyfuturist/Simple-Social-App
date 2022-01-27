@@ -2,6 +2,7 @@ import MainNavigation from '../MainNavigation/MainNavigation'
 import classes from './Friends.module.css'
 import { useEffect, useState} from 'react'
 import Person from '../Person/Person'
+import axios from 'axios'
 
 const Friends = () => {
     const myStorage = window.localStorage
@@ -15,10 +16,10 @@ const Friends = () => {
         const fetchData = async () => {
 
             try{
-
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends.json')
-                const friends = await response.json()
-
+                
+                const response = await axios.post('http://localhost:3001/getFriends', {id:id})
+                const friends = await response.data
+                
                 let friendRequestsArray = []
                 let friendsArray = []
                 for(let key in friends){

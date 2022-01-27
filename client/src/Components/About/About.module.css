@@ -1,3 +1,16 @@
 .aboutContainer{
     text-align: center;
 }
+.button{
+    padding:1%;
+    color:white;
+    background-color:rgb(10, 140, 201);
+    border-radius: 5px;
+    font-size: 110%;
+    font-weight: bold;
+    border:solid white 2px;
+}
+
+.button:hover{
+    border:solid black 2px;
+}

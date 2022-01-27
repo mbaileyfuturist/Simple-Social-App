@@ -46,3 +46,11 @@
     font-weight: bold;
     text-align: center;
 }
+.title{
+    font-size:200%;
+    margin-top:10%;
+    font-weight: bold;
+}
+.formContainer{
+    margin-top:8%;
+}

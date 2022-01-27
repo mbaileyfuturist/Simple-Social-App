@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Button from '../Button/Button'
 import Post from '../Post/Post'
 import Input from '../Input/Input'
+import axios from 'axios'
 
 const Home = () => {
 
@@ -19,24 +20,27 @@ const Home = () => {
 
 
     useEffect(() => {
-
-        let id = myStorage.getItem('id')
         
         const fetchData = async () => {
 
             //Get the profile picture.
             try{
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/uploadProfilePicture/url.json')
-                const image = await response.json()
+                const response = await axios.post('http://localhost:3001/getProfilePicture', {id:id})
+
+                const image = await response.data
+
                 setImageUrl(image)
+                
             }catch(error){
                 console.log(error)
             }
             //Get the posts.
             try{
 
-                const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json')
-                const posts = await response.json()
+                const response = await axios.post('http://localhost:3001/getPosts', {id:id})
+        
+                const posts = await response.data
+
 
                 for(let key in posts){
                     postsArray.push(posts[key])
@@ -75,17 +79,11 @@ const Home = () => {
         
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json', {
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
+            const response = await axios.post('http://localhost:3001/uploadPost',{
                     postHeader:postHeader,
                     post:post,
-                    id:postHeader
+                    id:id
                 })
-            })
 
             if(response.status !== 200){
                 throw new Error('Failed to upload new post.')
