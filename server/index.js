@@ -74,12 +74,13 @@ app.use(cors())
     
     app.post('/postAbout', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
         const about = req.body.about
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/about.json', {
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/about.json?auth=' + idToken, {
                 method:'PUT',
                 headers:{
                     'Content-Type':'application/json'
@@ -99,11 +100,12 @@ app.use(cors())
     
     app.post('/uploadPhoto', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/uploadProfilePicture.json', {
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/uploadProfilePicture.json?auth=' + idToken, {
             method:'PUT',
             headers:{
                 'Content-Type':'application/json'
@@ -126,11 +128,12 @@ app.use(cors())
     
     app.post('/getProfilePicture', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
         
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/uploadProfilePicture/url.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/uploadProfilePicture/url.json?auth=' + idToken)
             const data = await response.json()
              
             if(response.status !== 200){
@@ -146,11 +149,12 @@ app.use(cors())
     
     app.post('/getPosts', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json?auth=' + idToken)
             const data = await response.json()
 
             if(response.status !== 200){
@@ -165,11 +169,12 @@ app.use(cors())
     
     app.post('/uploadPost', async (req, res) => {
 
+        const idToken= req.body.idToken
         const id = req.body.id
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json', {
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json?auth=' + idToken, {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
@@ -189,11 +194,12 @@ app.use(cors())
 
     app.post('/getCorrespondingUser', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '.json?auth=' + idToken)
             const data = await response.json()
 
             if(response.status !== 200){
@@ -208,12 +214,12 @@ app.use(cors())
     })
 
     app.post('/getMessageRooms', async (req, res) => {
-
+        const idToken = req.body.idToken
         const id = req.body.id
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages.json?auth=' + idToken)
             const data = await response.json()
             
             if(response.status !== 200){
@@ -229,12 +235,13 @@ app.use(cors())
 
     app.post('/getMessages', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
         const correspondingId = req.body.correspondingId
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages/' + correspondingId + '.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages/' + correspondingId + '.json?auth=' + idToken)
             const data = await response.json()
             
             if(response.status !== 200){
@@ -250,12 +257,13 @@ app.use(cors())
 
     app.post('/postMessageToUser', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
         const correspondingId = req.body.correspondingId
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages/' + correspondingId + '.json', {
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages/' + correspondingId + '.json?auth=' + idToken, {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
@@ -281,12 +289,13 @@ app.use(cors())
     
     app.post('/postMessageToCorrespondingUser', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
         const correspondingId = req.body.correspondingId
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + correspondingId + '/messages/' + id + '.json',{
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + correspondingId + '/messages/' + id + '.json?auth=' + idToken,{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
@@ -312,11 +321,12 @@ app.use(cors())
     
     app.post('/getFriends', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends.json?auth=' + idToken)
             const data = await response.json()
 
             if(response.status !== 200){
@@ -332,13 +342,14 @@ app.use(cors())
 
     app.post('/updateStatus', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
         const key = req.body.key
         const status = req.body.status
         
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends/' + key + '/status.json',{
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends/' + key + '/status.json?auth=' + idToken,{
                 method:'PUT',
                 headers:{
                     'Content-Type':'application/json'
@@ -359,11 +370,12 @@ app.use(cors())
 
     app.post('/getUser', async (req, res) => {
         
+        const idToken = req.body.idToken
         const userId = req.body.id
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + userId + '.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + userId + '.json?auth=' + idToken)
             const data = await response.json()
 
             if(response.status !== 200){
@@ -379,11 +391,12 @@ app.use(cors())
     
     app.post('/addFriend', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.paramId
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends.json', {
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/friends.json?auth=' + idToken, {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
@@ -408,9 +421,12 @@ app.use(cors())
         }
     })
 
-    app.get('/getUsers', async (req, res) => {
+    app.post('/getUsers', async (req, res) => {
+
+        const idToken = req.body.idToken
+
        try{
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users.json?auth=' + idToken)
             const data = await response.json()
 
             if(response.status !== 200){
@@ -425,10 +441,11 @@ app.use(cors())
     app.post('/getPosts', async (req, res) => {
 
         const id = req.body.id
+        const idToken = req.body.idToken
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts.json?auth=' + idToken)
             const data = await response.json()
 
             if(response.status !== 200){
@@ -444,12 +461,13 @@ app.use(cors())
 
     app.post('/deletePost', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
         const key = req.body.key
 
         try{
 
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts/' + key + '.json',{
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/posts/' + key + '.json?auth=' + idToken,{
                 method:'DELETE',
                 headers:{
                     'Content-Type':'application/json'
@@ -465,10 +483,11 @@ app.use(cors())
     
     app.post('/getMessages', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id 
 
         try{
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages.json')
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/messages.json?auth=' + idToken)
             const data = await response.json()
 
             if(response.status !== 200){
@@ -483,8 +502,10 @@ app.use(cors())
     
     app.post('/addUser', async (req, res) => {
 
+        const idToken = req.body.idToken
+
         try{
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users.json', {
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users.json?auth=' + idToken, {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -514,10 +535,11 @@ app.use(cors())
     
     app.post('/updateUser', async (req, res) => {
 
+        const idToken = req.body.idToken
         const id = req.body.id
 
         try{
-            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/id.json', {
+            const response = await fetch('https://social-media-application-e63b9-default-rtdb.firebaseio.com/Users/' + id + '/id.json?auth=' + idToken, {
             method:'PUT',
             headers:{
                 'Content-Type':'application/json'

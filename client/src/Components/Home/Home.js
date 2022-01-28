@@ -10,6 +10,7 @@ const Home = () => {
 
     let myStorage = window.localStorage
     const id = myStorage.getItem('id')
+    const idToken = myStorage.getItem('idToken')
     let postsArray = []
 
     const [newPost, setNewPost] = useState(false)
@@ -25,7 +26,7 @@ const Home = () => {
 
             //Get the profile picture.
             try{
-                const response = await axios.post('http://localhost:3001/getProfilePicture', {id:id})
+                const response = await axios.post('http://localhost:3001/getProfilePicture', {idToken:idToken, id:id})
 
                 const image = await response.data
 
@@ -37,7 +38,7 @@ const Home = () => {
             //Get the posts.
             try{
 
-                const response = await axios.post('http://localhost:3001/getPosts', {id:id})
+                const response = await axios.post('http://localhost:3001/getPosts', {idToken:idToken, id:id})
         
                 const posts = await response.data
 
@@ -82,7 +83,8 @@ const Home = () => {
             const response = await axios.post('http://localhost:3001/uploadPost',{
                     postHeader:postHeader,
                     post:post,
-                    id:id
+                    id:id,
+                    idToken:idToken
                 })
 
             if(response.status !== 200){

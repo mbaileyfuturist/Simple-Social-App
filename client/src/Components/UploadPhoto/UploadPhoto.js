@@ -13,6 +13,7 @@ const UploadPhoto = () => {
 
     const myStorage = window.localStorage
     const id = myStorage.getItem('id')
+    const idToken = myStorage.getItem('idToken')
 
     const [image, setImage] = useState(null)
     const [file, setFile] = useState(null)
@@ -61,7 +62,7 @@ const UploadPhoto = () => {
 
     const putUrlToUser = async (url) => {
         setUploaded(true)
-        const response = await axios.post('http://localhost:3001/uploadPhoto',{ id:id, url:url})
+        const response = await axios.post('http://localhost:3001/uploadPhoto',{idToken:idToken, id:id, url:url})
         
         if(response.status !== 200){
             throw new Error('Failed to upload data.')

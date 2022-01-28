@@ -7,6 +7,7 @@ import axios from 'axios'
 const SearchPeople = () => {
 
     const myStorage = window.localStorage
+    const idToken = myStorage.getItem('idToken')
     const searchFriend = myStorage.getItem('friend')
     const [findFriends, setFindFriends] = useState([])
 
@@ -16,7 +17,7 @@ const SearchPeople = () => {
 
             try{
 
-                const response = await axios.get('http://localhost:3001/getUsers')
+                const response = await axios.post('http://localhost:3001/getUsers', {idToken:idToken})
                 const users = await response.data
                 
                 let findFriendsArray = []

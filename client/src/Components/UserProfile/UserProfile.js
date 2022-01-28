@@ -10,6 +10,8 @@ const UserProfile = props => {
 
     let myStorage = window.localStorage
     const id = myStorage.getItem('id')
+    const idToken = myStorage.getItem('idToken')
+
     const params = useParams()
     const history = useHistory()
     const userId = params.id.substring(1)
@@ -25,7 +27,7 @@ const UserProfile = props => {
         const fetchUser = async () => {
             try{
                 
-                const response = await axios.post('http://localhost:3001/getUser', {id:id})
+                const response = await axios.post('http://localhost:3001/getUser', {idToken:idToken, id:id})
                 const loggedInUser = await response.data
                 setLoggedInUser(loggedInUser)
 
@@ -40,7 +42,7 @@ const UserProfile = props => {
         const fetchCorrespondingUser = async () => {
             try{
 
-                const response = await axios.post('http://localhost:3001/getUser', {id:userId})
+                const response = await axios.post('http://localhost:3001/getUser', {idToken:idToken, id:userId})
                 const user = await response.data
                 setCorrespondingUser(user)
 
@@ -72,6 +74,7 @@ const UserProfile = props => {
         //Post the friend request to logged in user
         try{
             const response = await axios.post('http://localhost:3001/addFriend', {
+                idToken:idToken,
                 paramId:id,
                 firstName:correspondingUser.firstName,
                 lastName:correspondingUser.lastName,
@@ -90,6 +93,7 @@ const UserProfile = props => {
         //Post friend request to corresponding user.
         try{
             const response = await axios.post('http://localhost:3001/addFriend', {
+                idToken:idToken,
                 paramId:userId,
                 firstName:loggedInUser.firstName,
                 lastName:loggedInUser.lastName,

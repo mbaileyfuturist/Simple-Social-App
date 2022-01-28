@@ -8,6 +8,7 @@ const About = () => {
     
     const myStorage = window.localStorage
     const id = myStorage.getItem('id')
+    const idToken = myStorage.getItem('idToken')
     const history = useHistory()
     const [about, setAbout] = useState('')
 
@@ -21,7 +22,7 @@ const About = () => {
         
         try{
 
-            const response = await axios.post('http://localhost:3001/postAbout', {id:id, about:about})
+            const response = await axios.post('http://localhost:3001/postAbout', {idToken: idToken, id:id, about:about})
 
             history.push('/UploadPhoto')
             

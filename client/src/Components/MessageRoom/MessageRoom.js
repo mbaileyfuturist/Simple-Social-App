@@ -12,13 +12,14 @@ const MessageRoom = () => {
 
     const myStorage = window.localStorage
     const id = myStorage.getItem('id')
+    const idToken = myStorage.getItem('idToken')
     const [user, setUser] = useState({})
     const [message, setMessage] = useState('')
     const [messages, setMsssages] = useState([])
 
     useEffect(() => {
         const getCorrespondingUser = async () => {
-            const response = await axios.post('http://localhost:3001/getCorrespondingUser', {id:correspondingId})
+            const response = await axios.post('http://localhost:3001/getCorrespondingUser', {idToken:idToken, id:correspondingId})
             const user = await response.data
 
             setUser(user)
@@ -28,7 +29,8 @@ const MessageRoom = () => {
             try{
                 const response = await axios.post('http://localhost:3001/getMessages', {
                     id:id,
-                    correspondingId:correspondingId
+                    correspondingId:correspondingId,
+                    idToken:idToken
                 })
                 const messages = await response.data
 
@@ -64,6 +66,7 @@ const MessageRoom = () => {
             const response = await axios.post('http://localhost:3001/postMessageToUser',{
                 message:message,
                 id:id,
+                idToken:idToken,
                 correspondingId:correspondingId,
                 firstName:user.firstName,
                 lastName:user.lastName
@@ -76,6 +79,7 @@ const MessageRoom = () => {
             const response = await axios.post('http://localhost:3001/postMessageToCorrespondingUser',{
                 message:message,
                 id:id,
+                idToken:idToken,
                 correspondingId:correspondingId,
                 firstName:user.firstName,
                 lastName:user.lastName

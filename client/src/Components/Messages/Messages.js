@@ -9,6 +9,8 @@ const Messages = props => {
 
     const myStorage = window.localStorage
     const id = myStorage.getItem('id')
+    const idToken = myStorage.getItem('idToken')
+
     //Message room in this case is represented by the first message.
     const [messageRooms, setMessageRooms] = useState([])
 
@@ -19,6 +21,7 @@ const Messages = props => {
 
                 const response = await axios.post('http://localhost:3001/getMessageRooms', {
                     id:id,
+                    idToken:idToken
                 })
                 const messages = await response.data
 

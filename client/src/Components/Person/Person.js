@@ -8,6 +8,8 @@ const Person = props => {
 
     const myStorage = window.localStorage
     const id = myStorage.getItem('id')
+    const idToken = myStorage.getItem('idToken')
+
     const history = useHistory()
     const [user, setUser] = useState()
     const [status, setStatus] = useState(props.status)
@@ -16,7 +18,7 @@ const Person = props => {
         
         const fetchUser = async () => {
             
-            const response = await axios.post('http://localhost:3001/getUser', {id:id})
+            const response = await axios.post('http://localhost:3001/getUser', {idToken:idToken, id:id})
             const user = await response.data
             setUser(user)
         }
@@ -33,12 +35,13 @@ const Person = props => {
         try{
 
             //Set status to accepted for the user that accepted.
-            const response = await axios.post('http://localhost:3001/getFriends', {id:id})
+            const response = await axios.post('http://localhost:3001/getFriends', {idToken:idToken, id:id})
             const friends = await response.data
 
             for(let key in friends){
                 if(friends[key].id === props.id){
                     const response = await axios.post('http://localhost:3001/updateStatus', {
+                        idToken:idToken,
                         id:id,
                         key:key,
                         status:'accepted'})
@@ -46,12 +49,13 @@ const Person = props => {
             }
 
             //Set status to accepted for the corresponding user.
-            const responseTwo = await axios.post('http://localhost:3001/getFriends', {id:props.id})
+            const responseTwo = await axios.post('http://localhost:3001/getFriends', {idToken:idToken, id:props.id})
             const friendsTwo = await responseTwo.data
 
             for(let key in friendsTwo){
                 if(friendsTwo[key].id === user.id){
                     const response = await axios.put('http://localhost:3001/updateStatus', {
+                            idToken:idToken,
                             id:props.id,
                             key:key,
                             status:'accepted'})

@@ -7,7 +7,7 @@ import axios from 'axios'
 const Friends = () => {
     const myStorage = window.localStorage
     const id = myStorage.getItem('id')
-
+    const idToken = myStorage.getItem('idToken')
     const [friends, setFriends] = useState([])
     const [friendRequests, setFriendRequests] = useState([])
 
@@ -17,7 +17,7 @@ const Friends = () => {
 
             try{
                 
-                const response = await axios.post('http://localhost:3001/getFriends', {id:id})
+                const response = await axios.post('http://localhost:3001/getFriends', {idToken:idToken, id:id})
                 const friends = await response.data
                 
                 let friendRequestsArray = []
