@@ -2,8 +2,8 @@
 
 The message rooms simulate realtime messaging, by performing one GET request per second.</br></br>
 
-This project was developed using React, Express, Node.js and Google Firebase. User and database authentication</br>
-done using Google Firebase.</br></br>
+This project was developed using React, Express, Node.js and Google Firebase. The user and database authentication</br>
+has been done using Google Firebase.</br></br>
 
 To get started clone the project to your directory and navigate to the front end.</br>
 <b>$ cd Simple-Social-App/client</b>
